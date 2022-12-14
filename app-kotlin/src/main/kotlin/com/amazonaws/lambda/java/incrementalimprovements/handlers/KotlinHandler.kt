@@ -64,7 +64,9 @@ class KotlinHandler :
             val product: Product = productMapper.mapFromJson(input.body)
             product.id = UUID.randomUUID().toString()
             productStore.saveProduct(product)
-            response.withBody(productMapper.mapToJson(product))
+            response
+                .withBody(productMapper.mapToJson(product))
+                .withStatusCode(200)
         } catch (e: Exception) {
             e.printStackTrace()
             context.logger.log(e.message)

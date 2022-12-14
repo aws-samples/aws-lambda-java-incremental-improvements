@@ -47,7 +47,7 @@ public class GraalVmHandler implements RequestHandler<APIGatewayV2HTTPEvent, API
             Product product = productMapper.mapFromJson(input.getBody());
             product.setId(UUID.randomUUID().toString());
             productStore.saveProduct(product);
-            response.withBody(productMapper.mapToJson(product));
+            response.withStatusCode(200).withBody(productMapper.mapToJson(product));
         } catch (Exception e) {
             e.printStackTrace();
             context.getLogger().log(e.getMessage());
